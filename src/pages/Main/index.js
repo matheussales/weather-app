@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { connect } from "react-redux";
+import { useDispatch } from "react-redux";
 import api from "../../services/api";
 
 import Card from "../../components/Card";
@@ -7,7 +7,8 @@ import List from "../List";
 
 import { Container, Button } from "./styles";
 
-function Main({ dispatch }) {
+export default function Main() {
+  const dispatch = useDispatch();
   const [actualWeather, setActualWeather] = useState({});
 
   const cities = [
@@ -61,4 +62,3 @@ function Main({ dispatch }) {
     </Container>
   );
 }
-export default connect()(Main);

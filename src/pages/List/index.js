@@ -1,9 +1,11 @@
 import React from "react";
-import { connect } from "react-redux";
+import { useSelector } from "react-redux";
 
 // import { Container } from './styles';
 
-function List({ weathers }) {
+export default function List() {
+  const weathers = useSelector(state => state.weather);
+
   return (
     <ul>
       {weathers.map(weather => (
@@ -12,7 +14,3 @@ function List({ weathers }) {
     </ul>
   );
 }
-
-export default connect(state => ({
-  weathers: state.weather
-}))(List);
