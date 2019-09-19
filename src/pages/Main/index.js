@@ -6,6 +6,7 @@ import Card from "../../components/Card";
 import List from "../List";
 
 import { Container, Button } from "./styles";
+import * as WeatherActions from "../../store/modules/weather/actions";
 
 function Main({ dispatch }) {
   const [actualWeather, setActualWeather] = useState({});
@@ -42,7 +43,7 @@ function Main({ dispatch }) {
     const response = await api.get("/current/", { params });
     setActualWeather(response.data.main);
 
-    dispatch({ type: "ADD_WEATHER", city });
+    dispatch(WeatherActions.addWeather(city));
   }
 
   return (
