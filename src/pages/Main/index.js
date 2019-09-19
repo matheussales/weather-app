@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import { bindActionCreators } from "redux";
 import { connect } from "react-redux";
 import api from "../../services/api";
 
@@ -8,7 +9,7 @@ import List from "../List";
 import { Container, Button } from "./styles";
 import * as WeatherActions from "../../store/modules/weather/actions";
 
-function Main({ dispatch }) {
+function Main({ addWeather }) {
   const [actualWeather, setActualWeather] = useState({});
 
   const cities = [
@@ -43,7 +44,7 @@ function Main({ dispatch }) {
     const response = await api.get("/current/", { params });
     setActualWeather(response.data.main);
 
-    dispatch(WeatherActions.addWeather(city));
+    addWeather(city);
   }
 
   return (
@@ -62,4 +63,11 @@ function Main({ dispatch }) {
     </Container>
   );
 }
-export default connect()(Main);
+
+const mapDispatchToProps = dispatch =>
+  bindActionCreators(WeatherActions, dispatch);
+
+export default connect(
+  null,
+  mapDispatchToProps
+)(Main);
